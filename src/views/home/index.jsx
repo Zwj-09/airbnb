@@ -43,6 +43,10 @@ const Home = memo(() => {
       <div className="home-content w">
         <h1>探索全球超400万独特房源</h1>
 
+        <p className="text-3xl text-tahiti font-bold underline ">
+          Hello world!
+        </p>
+
         <h2>{houseList.title}</h2>
 
         {houseList?.list?.map((item) => {
