@@ -1,5 +1,5 @@
-const CracoLessPlugin = require("craco-less");
-const path = require("path");
+const CracoLessPlugin = require('craco-less');
+const path = require('path');
 
 const pathResolve = (dir) => {
   return path.resolve(__dirname, dir);
@@ -8,7 +8,7 @@ const pathResolve = (dir) => {
 module.exports = {
   plugins: [
     {
-      plugin: CracoLessPlugin,
+      plugin: CracoLessPlugin
       //   options: {
       //     lessLoaderOptions: {
       //       lessOptions: {
@@ -17,12 +17,12 @@ module.exports = {
       //       },
       //     },
       //   },
-    },
+    }
   ],
   webpack: {
     alias: {
-      "@": pathResolve("src"),
+      '@': pathResolve('src')
       // "@mui/styled-engine": "@mui/styled-engine-sc",
-    },
-  },
+    }
+  }
 };

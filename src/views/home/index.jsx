@@ -1,13 +1,13 @@
-import React, { memo, useEffect, useState } from "react";
-import { Carousel } from "antd";
-import request from "@/services/request";
-import { HomeWrapper } from "./style";
+import React, { memo, useEffect, useState } from 'react';
+import { Carousel } from 'antd';
+import request from '@/services/request';
+import { HomeWrapper } from './style';
 
 const Home = memo(() => {
   const [houseList, setHouseList] = useState({});
 
   useEffect(() => {
-    request("/home/highscore").then((res) => {
+    request('/home/highscore').then((res) => {
       if (res.status === 200) {
         setHouseList(res.data);
       }
@@ -16,11 +16,11 @@ const Home = memo(() => {
   }, []);
 
   const contentStyle = {
-    height: "320px",
-    lineHeight: "320px",
-    color: "#fff",
-    textAlign: "center",
-    background: "#364d79",
+    height: '320px',
+    lineHeight: '320px',
+    color: '#fff',
+    textAlign: 'center',
+    background: '#364d79'
   };
 
   return (

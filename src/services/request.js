@@ -1,9 +1,9 @@
-import axios from "axios";
-import { BASE_URL, TIME_OUT } from "@/config/baseURL";
+import axios from 'axios';
+import { BASE_URL, TIME_OUT } from '@/config/baseURL';
 
 const request = axios.create({
   baseURL: BASE_URL,
-  timeout: TIME_OUT,
+  timeout: TIME_OUT
 });
 
 request.interceptors.request.use(

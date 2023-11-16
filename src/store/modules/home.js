@@ -1,9 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const homeSlice = createSlice({
-  name: "home",
+  name: 'home',
   initialState: {},
-  reducers: {},
+  reducers: {}
 });
 
 export default homeSlice.reducer;

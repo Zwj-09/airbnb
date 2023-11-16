@@ -1,21 +1,21 @@
-import React, { memo, useState } from "react";
-import LanguageIcon from "@mui/icons-material/Language";
-import MenuIcon from "@mui/icons-material/Menu";
-import Avatar from "@mui/material/Avatar";
-import SearchIcon from "@mui/icons-material/Search";
-import classnames from "classnames";
+import React, { memo, useState } from 'react';
+import LanguageIcon from '@mui/icons-material/Language';
+import MenuIcon from '@mui/icons-material/Menu';
+import Avatar from '@mui/material/Avatar';
+import SearchIcon from '@mui/icons-material/Search';
+import classnames from 'classnames';
 
 import {
   HeaderWrapper,
   LeftWrapper,
   CenterWrapper,
-  RightWrapper,
-} from "./style";
+  RightWrapper
+} from './style';
 const AppHeader = memo(() => {
   const [searchTabs] = useState([
-    { label: "全球", value: "全球" },
-    { label: "入住退房日期", value: "入住退房日期" },
-    { label: "关键词", value: "关键词" },
+    { label: '全球', value: '全球' },
+    { label: '入住退房日期', value: '入住退房日期' },
+    { label: '关键词', value: '关键词' }
   ]);
   const [currentSearchTab, setCurrentSearchTab] = useState(0);
 
@@ -26,7 +26,7 @@ const AppHeader = memo(() => {
   return (
     <HeaderWrapper>
       <LeftWrapper>
-        <img src={require("@/assets/img/logo.png")} alt="" />
+        <img src={require('@/assets/img/logo.png')} alt="" />
       </LeftWrapper>
       <CenterWrapper>
         <div className="search-box">
@@ -34,8 +34,8 @@ const AppHeader = memo(() => {
             return (
               <div
                 key={item.value}
-                className={classnames("search-tab", {
-                  active: currentSearchTab === index,
+                className={classnames('search-tab', {
+                  active: currentSearchTab === index
                 })}
                 onClick={() => handleClickSearchTab(index)}
               >
@@ -57,7 +57,7 @@ const AppHeader = memo(() => {
 
         <div className="btn">
           <MenuIcon />
-          <Avatar alt="Cindy Baker" src={require("@/assets/img/avatar.png")} />
+          <Avatar alt="Cindy Baker" src={require('@/assets/img/avatar.png')} />
         </div>
       </RightWrapper>
     </HeaderWrapper>
