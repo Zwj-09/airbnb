@@ -1,18 +1,53 @@
 import styled from 'styled-components';
 
 export const HomeWrapper = styled.div`
-  .home-content {
-    h1 {
-      font-size: 26px;
-      font-weight: 700;
-      margin: 20px 0;
+  .cover {
+    height: 529px;
+    object-fit: cover;
+  }
+`;
+
+export const RoomWrapper = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+`;
+
+export const RoomItemWrapper = styled.div`
+  width: 25%;
+  padding: 8px;
+  .room-inner {
+    width: 100%;
+
+    .cover-img {
+      position: relative;
+      box-sizing: border-box;
+      padding: 66.66% 8px 0;
+      border-radius: 3px;
+      overflow: hidden;
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
-    /* .title {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      position: sticky;
-      top: 80px;
-    } */
+
+    .desc {
+      color: ${(props) => props.$verifyColor};
+    }
+
+    .name {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .rate {
+      color: ${(props) => props.$starRatingColor};
+    }
   }
 `;

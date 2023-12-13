@@ -1,62 +1,84 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Carousel } from 'antd';
-import request from '@/services/request';
-import { HomeWrapper } from './style';
+import { HomeWrapper, RoomWrapper, RoomItemWrapper } from './style';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { fetchHomeDataAction } from '@/store/modules/home';
+import Rating from '@mui/material/Rating';
 
 const Home = memo(() => {
-  const [houseList, setHouseList] = useState({});
+  // 从 redux 中获取数据
+  const { goodPriceList } = useSelector(
+    (state) => ({
+      goodPriceList: state.home.goodPriceList
+    }),
+    shallowEqual
+  );
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    request('/home/highscore').then((res) => {
-      if (res.status === 200) {
-        setHouseList(res.data);
-      }
-    });
-    return () => {};
-  }, []);
-
-  const contentStyle = {
-    height: '320px',
-    lineHeight: '320px',
-    color: '#fff',
-    textAlign: 'center',
-    background: '#364d79'
-  };
+    dispatch(fetchHomeDataAction());
+  }, [dispatch]);
 
   return (
     <HomeWrapper>
-      <Carousel autoplay>
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
+      <Carousel autopla effect="fade">
+        <img
+          className="cover"
+          src={require('@/assets/img/cover.jpeg')}
+          alt=""
+        />
+        <img
+          className="cover"
+          src={require('@/assets/img/cover.jpeg')}
+          alt=""
+        />
+        <img
+          className="cover"
+          src={require('@/assets/img/cover.jpeg')}
+          alt=""
+        />
       </Carousel>
 
-      <div className="home-content w">
-        <h1>探索全球超400万独特房源</h1>
+      <div className="list-box">
+        <div className="good-price w">
+          <h1 className="text-3xl mb-2">{goodPriceList?.title}</h1>
+          <h2 className="text-lg mb-2">副标题</h2>
 
-        <p className="text-3xl text-tahiti font-bold underline ">
-          Hello world!
-        </p>
+          <RoomWrapper>
+            {goodPriceList.list?.map((item) => {
+              return (
+                <RoomItemWrapper
+                  $contentColor={item?.bottom_info?.content_color}
+                  $verifyColor={item?.verify_info?.text_color}
+                  $starRatingColor={item?.star_rating_color}
+                  key={item.id}
+                >
+                  <div className="room-inner">
+                    <div className="cover-img">
+                      <img src={item.picture_url} alt="" />
+                    </div>
 
-        <h2>{houseList.title}</h2>
+                    <div className="desc mt-1 text-sm">
+                      {item.verify_info.messages.join(' . ')}
+                    </div>
 
-        {houseList?.list?.map((item) => {
-          return (
-            <div key={item.id}>
-              <span>{item.name}</span>
-              <img src={item.picture_url} alt="" />
-            </div>
-          );
-        })}
+                    <div className="name my-1 text-sm">{item.name}</div>
+
+                    <div className="price mb-1 text-sm">
+                      {item.price_format}/晚
+                    </div>
+
+                    <div className="rate flex items-center">
+                      <Rating value={item.reviews_count} readOnly />
+                      <span className="ml-1">{item.bottom_info?.content}</span>
+                    </div>
+                  </div>
+                </RoomItemWrapper>
+              );
+            })}
+          </RoomWrapper>
+        </div>
       </div>
     </HomeWrapper>
   );
