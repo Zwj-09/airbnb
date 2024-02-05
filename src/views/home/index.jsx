@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { Carousel } from 'antd';
 import Rating from '@mui/material/Rating';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -49,9 +49,7 @@ const Home = memo(() => {
         />
       </Carousel>
 
-      <RoomSection />
-
-      {/* <div className="list-box">
+      <div className="list-box">
         <div className="good-price w">
           <h1 className="text-3xl mb-2">{goodPriceList?.title}</h1>
           <h2 className="text-lg mb-2">副标题</h2>
@@ -98,7 +96,7 @@ const Home = memo(() => {
             })}
           </RoomWrapper>
         </div>
-      </div> */}
+      </div>
     </HomeWrapper>
   );
 });
