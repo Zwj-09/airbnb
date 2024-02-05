@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/display-name': 'off'
+    'react/display-name': 'off',
+    'react/prop-types': 'off'
   }
 };

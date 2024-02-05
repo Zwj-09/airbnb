@@ -1,10 +1,34 @@
 import React, { memo } from 'react';
 import { Carousel } from 'antd';
-import { HomeWrapper } from './style';
-
-import RoomSection from '@/components/roomSection';
+import Rating from '@mui/material/Rating';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { HomeWrapper, RoomWrapper, RoomItemWrapper } from './style';
+import { fetchHomeDataAction } from '@/store/modules/home';
+import LazyLoad from '@/components/lazyLoad/index';
+import { useNavigate } from 'react-router-dom';
 
 const Home = memo(() => {
+  // 从 redux 中获取数据
+  const { goodPriceList } = useSelector(
+    (state) => ({
+      goodPriceList: state.home.goodPriceList
+    }),
+    shallowEqual
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchHomeDataAction());
+  }, [dispatch]);
+
+  const navigate = useNavigate();
+
+  const handleToDetail = () => {
+    console.log('跳转到详情页');
+    navigate('/detail');
+  };
+
   return (
     <HomeWrapper>
       <Carousel autopla effect="fade">
@@ -41,9 +65,10 @@ const Home = memo(() => {
                   $starRatingColor={item?.star_rating_color}
                   key={item.id}
                 >
-                  <div className="room-inner">
+                  <div className="room-inner" onClick={() => handleToDetail()}>
                     <div className="cover-img">
-                      <img src={item.picture_url} alt="" />
+                      {/* <img src={item.picture_url} alt="" /> */}
+                      <LazyLoad src={item.picture_url}></LazyLoad>
                     </div>
 
                     <div className="desc mt-1 text-sm">
