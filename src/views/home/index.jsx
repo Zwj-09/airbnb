@@ -1,25 +1,10 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { Carousel } from 'antd';
-import { HomeWrapper, RoomWrapper, RoomItemWrapper } from './style';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { fetchHomeDataAction } from '@/store/modules/home';
-import Rating from '@mui/material/Rating';
+import { HomeWrapper } from './style';
+
+import RoomSection from '@/components/roomSection';
 
 const Home = memo(() => {
-  // 从 redux 中获取数据
-  const { goodPriceList } = useSelector(
-    (state) => ({
-      goodPriceList: state.home.goodPriceList
-    }),
-    shallowEqual
-  );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchHomeDataAction());
-  }, [dispatch]);
-
   return (
     <HomeWrapper>
       <Carousel autopla effect="fade">
@@ -40,7 +25,9 @@ const Home = memo(() => {
         />
       </Carousel>
 
-      <div className="list-box">
+      <RoomSection />
+
+      {/* <div className="list-box">
         <div className="good-price w">
           <h1 className="text-3xl mb-2">{goodPriceList?.title}</h1>
           <h2 className="text-lg mb-2">副标题</h2>
@@ -70,7 +57,14 @@ const Home = memo(() => {
                     </div>
 
                     <div className="rate flex items-center">
-                      <Rating value={item.reviews_count} readOnly />
+                      <Rating
+                        value={item.reviews_count ?? 5}
+                        readOnly
+                        sx={{
+                          fontSize: '12px',
+                          color: '#00848a'
+                        }}
+                      />
                       <span className="ml-1">{item.bottom_info?.content}</span>
                     </div>
                   </div>
@@ -79,7 +73,7 @@ const Home = memo(() => {
             })}
           </RoomWrapper>
         </div>
-      </div>
+      </div> */}
     </HomeWrapper>
   );
 });

@@ -1,21 +1,27 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getHomeGoodPriceList } from '@/services/home/index';
+import {
+  getHomeGoodPriceList
+  // getHomeHighScoreList
+} from '@/services/home/index';
 
 export const fetchHomeDataAction = createAsyncThunk(
   'home/fetchHomeData',
   async () => {
-    const res = await getHomeGoodPriceList();
+    const homeGoodPriceList = await getHomeGoodPriceList();
 
-    if (res.status === 200) {
-      return res.data;
+    if (homeGoodPriceList.status === 200) {
+      return homeGoodPriceList.data;
     }
+
+    // const highScoreData = await getHomeHighScoreList();
+
+    // console.log('highScoreData', highScoreData.data);
   }
 );
 
 const homeSlice = createSlice({
   name: 'home',
   initialState: {
-    // 高性价比数据 goodprice、highscore
     goodPriceList: {}
   },
   reducers: {
