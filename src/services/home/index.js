@@ -21,7 +21,19 @@ export const getHomeGoodPriceList = () => {
  */
 export const getHomeHighScoreList = () => {
   return request({
-    url: '/home/highscroe',
+    url: '/home/highscore',
+    method: 'get'
+  });
+};
+/**
+ * @interface /home/discount
+ * @methods get
+ * @desc 折扣
+ * @param
+ */
+export const getHomeDiscountList = () => {
+  return request({
+    url: '/home/discount',
     method: 'get'
   });
 };

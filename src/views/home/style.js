@@ -54,3 +54,5 @@ export const RoomItemWrapper = styled.div`
     }
   }
 `;
+
+export const TabWrapper = styled.div``;
