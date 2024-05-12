@@ -2,7 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   getHomeGoodPriceList,
   getHomeHighScoreList,
-  getHomeDiscountList
+  getHomeDiscountList,
+  getHomeRecommendtList,
+  getHomeLongFortList,
+  getHomePlusList
 } from '@/services/home/index';
 
 export const fetchHomeDataAction = createAsyncThunk(
@@ -17,6 +20,15 @@ export const fetchHomeDataAction = createAsyncThunk(
     getHomeDiscountList().then((res) => {
       dispatch(setDiscountListAction(res.data));
     });
+    getHomeRecommendtList().then((res) => {
+      dispatch(setRecommendListAction(res.data));
+    });
+    getHomeLongFortList().then((res) => {
+      dispatch(setLongForListAction(res.data));
+    });
+    getHomePlusList().then((res) => {
+      dispatch(setPlusListAction(res.data));
+    });
   }
 );
 
@@ -25,7 +37,10 @@ const homeSlice = createSlice({
   initialState: {
     goodPriceList: {},
     highScoreList: {},
-    disCountList: {}
+    disCountList: {},
+    recommendList: {},
+    longForList: {},
+    plusList: {}
   },
   reducers: {
     setGoodPriceListAction(state, action) {
@@ -36,19 +51,27 @@ const homeSlice = createSlice({
     },
     setDiscountListAction(state, action) {
       state.disCountList = action.payload;
+    },
+    setRecommendListAction(state, action) {
+      state.recommendList = action.payload;
+    },
+    setLongForListAction(state, action) {
+      state.longForList = action.payload;
+    },
+    setPlusListAction(state, action) {
+      state.plusList = action.payload;
     }
   },
-  extraReducers: {
-    // [fetchHomeDataAction.fulfilled](state, action) {
-    //   state.goodPriceList = action.payload;
-    // }
-  }
+  extraReducers: {}
 });
 
 export const {
   setGoodPriceListAction,
   setHighScoreListAction,
-  setDiscountListAction
+  setDiscountListAction,
+  setRecommendListAction,
+  setLongForListAction,
+  setPlusListAction
 } = homeSlice.actions;
 
 export default homeSlice.reducer;

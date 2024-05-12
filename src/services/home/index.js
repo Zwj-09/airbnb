@@ -37,3 +37,41 @@ export const getHomeDiscountList = () => {
     method: 'get'
   });
 };
+
+/**
+ * @interface /home/hotrecommenddest
+ * @methods get
+ * @desc 热门推荐
+ * @param
+ */
+export const getHomeRecommendtList = () => {
+  return request({
+    url: '/home/hotrecommenddest',
+    method: 'get'
+  });
+};
+
+/**
+ * @interface /home/longfor
+ * @methods get
+ * @desc 向往数据
+ * @param
+ */
+export const getHomeLongFortList = () => {
+  return request({
+    url: '/home/longfor',
+    method: 'get'
+  });
+};
+/**
+ * @interface /home/plus
+ * @methods get
+ * @desc Plus 会员数据
+ * @param
+ */
+export const getHomePlusList = () => {
+  return request({
+    url: '/home/plus',
+    method: 'get'
+  });
+};

@@ -1,32 +1,29 @@
-import React, { memo, useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { fetchHomeDataAction } from '@/store/modules/home';
+import React, { memo } from 'react';
 import Rating from '@mui/material/Rating';
 import { RoomWrapper, RoomItemWrapper } from './style';
+import { useNavigate } from 'react-router-dom';
+import LazyLoad from '@/components/lazyLoad/index';
 
-const RoomSection = memo(() => {
-  // 从 redux 中获取数据
-  const { goodPriceList } = useSelector(
-    (state) => ({
-      goodPriceList: state.home.goodPriceList
-    }),
-    shallowEqual
-  );
+const RoomSection = memo((props) => {
+  const roomList = props.data;
 
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    dispatch(fetchHomeDataAction());
-  }, [dispatch]);
+  const handleToDetail = () => {
+    navigate('/detail');
+  };
+  const loadMore = () => {
+    navigate('/entire');
+  };
 
   return (
     <div className="list-box">
       <div className="good-price w">
-        <h1 className="text-3xl mb-2">{goodPriceList?.title}</h1>
-        <h2 className="text-lg mb-2">副标题</h2>
+        <h1 className="text-3xl mb-2">{roomList?.title}</h1>
+        <h2 className="text-lg mb-2">{roomList?.subtitle}</h2>
 
         <RoomWrapper>
-          {goodPriceList.list?.map((item) => {
+          {roomList.list?.map((item) => {
             return (
               <RoomItemWrapper
                 $contentColor={item?.bottom_info?.content_color}
@@ -34,9 +31,9 @@ const RoomSection = memo(() => {
                 $starRatingColor={item?.star_rating_color}
                 key={item.id}
               >
-                <div className="room-inner">
+                <div className="room-inner" onClick={() => handleToDetail()}>
                   <div className="cover-img">
-                    <img src={item.picture_url} alt="" />
+                    <LazyLoad src={item.picture_url}></LazyLoad>
                   </div>
 
                   <div className="desc mt-1 text-sm">
@@ -65,6 +62,8 @@ const RoomSection = memo(() => {
             );
           })}
         </RoomWrapper>
+
+        <div onClick={loadMore}>查看更多</div>
       </div>
     </div>
   );
