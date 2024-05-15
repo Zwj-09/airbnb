@@ -12,10 +12,7 @@ const LazyLoad = memo(({ src }) => {
       imgObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              setImgSrc(src);
-            }, 1000);
-
+            setImgSrc(src);
             imgObserver.unobserve(imgRef.current);
           }
         });
