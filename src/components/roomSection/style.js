@@ -10,6 +10,7 @@ export const RoomWrapper = styled.div`
 export const RoomItemWrapper = styled.div`
   width: 25%;
   padding: 8px;
+
   .room-inner {
     width: 100%;
 
@@ -19,12 +20,21 @@ export const RoomItemWrapper = styled.div`
       padding: 66.66% 8px 0;
       border-radius: 3px;
       overflow: hidden;
+
       img {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
+        transition: all 0.3s linear;
+      }
+
+      &:hover {
+        img {
+          cursor: pointer;
+          transform: scale(1.4);
+        }
       }
     }
 
@@ -42,6 +52,7 @@ export const RoomItemWrapper = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .rate {
       color: ${(props) => props.$starRatingColor};
     }

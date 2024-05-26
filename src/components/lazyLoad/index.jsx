@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
+import { Carousel } from 'antd';
 import loadingGif from '@/assets/img/loading.gif';
 
 const LazyLoad = memo(({ src }) => {
@@ -22,7 +23,13 @@ const LazyLoad = memo(({ src }) => {
     }
   }, [src]);
 
-  return <img ref={imgRef} src={imgSrc} alt="" />;
+  return (
+    <Carousel arrows infinite={false}>
+      <div>
+        <img ref={imgRef} src={imgSrc} alt="" />;
+      </div>
+    </Carousel>
+  );
 });
 
 export default LazyLoad;
